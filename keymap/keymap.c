@@ -24,7 +24,7 @@
 //
 #define CTL_N RCTL_T(KC_N)
 #define LT3_T LT(L_NUM_NAV, KC_T)
-#define ALT_R RALT_T(KC_R)
+#define ALT_R LALT_T(KC_R)
 #define GUI_I RGUI_T(KC_I)
 
 // Home-row mods (qwerty).
@@ -36,7 +36,7 @@
 //
 #define CTL_J RCTL_T(KC_J)
 #define LT3_K LT(L_NUM_NAV, KC_K)
-#define ALT_L RALT_T(KC_L)
+#define ALT_L LALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
 
 #define OSM_SFT OSM(MOD_LSFT)
