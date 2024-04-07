@@ -10,6 +10,8 @@
 // TODO cleanup readme
 //      nix flake run
 //      guide for initial flash for left and right
+// TODO generate clean schemes from layer definitions.
+//      Now they are good, but manual and prone to be outdated.
 
 #include QMK_KEYBOARD_H
 
@@ -88,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        --- a   o   e   s   g                        b   n   t   r   i   -
        rst :   x   .   w   z                        p   h   m   k   j   rst
                f11 f12     sft SYM ---     --- ret  spc     up  dwn
-                               SYS ---     --- ---
+                               SYS ---     --- SYS
        */
        KC_ESC ,   KC_F1,   KC_F2,   KC_F3,  KC_F4, KC_F5,     KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_ESC,
        TG_QWER, KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
@@ -156,10 +158,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           __  ,    __  ,       __  ,    __ ),
 
   [L_MOUSE] = LAYOUT_5x6_5(/*
-        __ __  __  __  __  __                       __  __  __  __  __  __
-        __ __  __  __  __  __                       __  w↑  ↑   b2  __  __
-        __ __  alt b1  ctl __                       __  <-- b1  --> b3  __
-        __ __  __  __  __  __                       __  w↓  ↓   __  __  __
+        __ __  __  __  __  __                       __  __  __ __  __  __
+        __ __  __  __  __  __                       __  w↑  ↑  b2  __  __
+        __ __  alt b1  ctl __                       __  <-  b1 ->  b3  __
+        __ __  __  __  __  __                       __  w↓  ↓  __  __  __
                __  __      sft ___ ___     ___ ___  ___       __  __
                                ___ ___     ___ ___
        */
