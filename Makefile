@@ -3,9 +3,9 @@
 
 qmk_dir = qmk_firmware
 
-keyboard = handwired/dactyl_manuform/5x6_5
+keyboard = cantor
 keymap = KEYMAP
-target = avrdude
+target = flash
 
 keymap_path = ${qmk_dir}/keyboards/${keyboard}/keymaps/${keymap}/
 build_cmd = sudo util/docker_build.sh ${keyboard}:${keymap}:${target}
@@ -15,7 +15,7 @@ keymap_clean:
 
 keymap_copy: keymap_clean
 	mkdir ${keymap_path}
-	cp keymap/* ${keymap_path}
+	cp cantor/* ${keymap_path}
 
 qmk_flash:
 	cd ${qmk_dir} && ${build_cmd}
