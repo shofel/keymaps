@@ -126,18 +126,31 @@
 #define ALT_L LALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
 
-// Home-row mods (ycuken).
-// Only numbers and navigation are useful. One can also use them in combination with mods.
-// But mods are not to be used with letters, since it would need to momentarily activate the boo layout.
-#define GUI__F LGUI_T(CL_F)
-#define ALT_bl LALT_T(CL_bl)
-#define LT3__V LT(L_NUM_NAV, CL_V)
-#define CTL__A LCTL_T(CL_A)
-//
-#define CTL__O RCTL_T(CL_O)
-#define LT3__L LT(L_NUM_NAV, CL_L)
-#define ALT__D LALT_T(CL_D)
-#define GUI_ZH RGUI_T(CL_ZH)
+/**
+ * Home-row mods (ycuken).
+ *   We can't just use unicode keys in tap-hold due to the QMK limitation.
+ *   @see https://docs.qmk.fm/mod_tap#caveats
+ *   So, we define a custom keycode instead (@see https://docs.qmk.fm/mod_tap#intercepting-mod-taps)
+ *   To keep it sanely simple, we implement only the NUM_NAV mod.
+ */
+enum custom_keycodes {
+  KC_CV = SAFE_RANGE,
+  KC_CL,
+};
+
+#define LT3__V LT(L_NUM_NAV, KC_CV)
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_CV:
+      send_unicode_string("в");
+      if (record->event.pressed) {
+        send_unicode_string("в");
+      }
+      return false;
+  }
+   return true;
+}
 
 /* Key aliases */
 
@@ -207,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                ___ ___     ___ ___
        */
      CL_YO,   CL_Y ,     CL_TS,     CL_U,   CL_K ,  CL_YE,    CL_N ,   CL_G ,    CL_SH,    CL_SHCH, CL_Z ,   CL_KH,
-   TG_CYLO,  GUI__F,    ALT_bl,   LT3__V, CTL__A ,  CL_P ,    CL_R ,   CL_O ,    CL_L ,    CL_D ,   CL_ZH,   CL_E ,
+   TG_CYLO,   CL_F ,     CL_bl,   LT3__V,   CL_A ,  CL_P ,    CL_R ,   CL_O ,    CL_L ,    CL_D ,   CL_ZH,   CL_E ,
    UC_LINX,   CL_YA,     CL_CH,     CL_S,   CL_M ,  CL_I ,    CL_T ,   CL_LS,    CL_B ,    CL_YU,   KC_DOT,  CL_HS,
 
                          __     ,     MO_CYUP ,    __  ,       __  ,    __  ,    __                      ),
