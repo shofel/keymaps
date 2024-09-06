@@ -15,91 +15,6 @@
 
 #include QMK_KEYBOARD_H
 
-/* Cyrillic input via unicode. */
-// unicode {{{
-/// FIXME fold
-
-// @see https://docs.qmk.fm/features/unicode#input-modes
-// FIXME it's not default for some reason
-#define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
-
-/**
- * ``` python
- * russian_alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
- * hexes = [hex(ord(i)) for i in russian_alphabet]
- * names = ["A", "B", "V", "G", "D", "YE", "YO", "ZH", "Z", "I", "Y", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "F", "KH", "TS", "CH", "SH", "SHCH", "HS", "bl", "LS", "E", "YU", "YA"]
- * xs = [*zip(russian_alphabet, hexes, [*map(lambda x: f"CL_{x}", names), *map(lambda x: f"CU_{x}", names)])]
- * [f"#define {alias} UC({code})" for (_, code, alias) in xs]
- * ```
- */
-#define CL_A	UC(0x430)
-#define CL_B	UC(0x431)
-#define CL_V	UC(0x432)
-#define CL_G	UC(0x433)
-#define CL_D	UC(0x434)
-#define CL_YE	UC(0x435)
-#define CL_YO	UC(0x451)
-#define CL_ZH	UC(0x436)
-#define CL_Z	UC(0x437)
-#define CL_I	UC(0x438)
-#define CL_Y	UC(0x439)
-#define CL_K	UC(0x43a)
-#define CL_L	UC(0x43b)
-#define CL_M	UC(0x43c)
-#define CL_N	UC(0x43d)
-#define CL_O	UC(0x43e)
-#define CL_P	UC(0x43f)
-#define CL_R	UC(0x440)
-#define CL_S	UC(0x441)
-#define CL_T	UC(0x442)
-#define CL_U	UC(0x443)
-#define CL_F	UC(0x444)
-#define CL_KH	UC(0x445)
-#define CL_TS	UC(0x446)
-#define CL_CH	UC(0x447)
-#define CL_SH	UC(0x448)
-#define CL_SHCH	UC(0x449)
-#define CL_HS	UC(0x44a)
-#define CL_bl	UC(0x44b)
-#define CL_LS	UC(0x44c)
-#define CL_E	UC(0x44d)
-#define CL_YU	UC(0x44e)
-#define CL_YA	UC(0x44f)
-#define CU_A	UC(0x410)
-#define CU_B	UC(0x411)
-#define CU_V	UC(0x412)
-#define CU_G	UC(0x413)
-#define CU_D	UC(0x414)
-#define CU_YE	UC(0x415)
-#define CU_YO	UC(0x401)
-#define CU_ZH	UC(0x416)
-#define CU_Z	UC(0x417)
-#define CU_I	UC(0x418)
-#define CU_Y	UC(0x419)
-#define CU_K	UC(0x41a)
-#define CU_L	UC(0x41b)
-#define CU_M	UC(0x41c)
-#define CU_N	UC(0x41d)
-#define CU_O	UC(0x41e)
-#define CU_P	UC(0x41f)
-#define CU_R	UC(0x420)
-#define CU_S	UC(0x421)
-#define CU_T	UC(0x422)
-#define CU_U	UC(0x423)
-#define CU_F	UC(0x424)
-#define CU_KH	UC(0x425)
-#define CU_TS	UC(0x426)
-#define CU_CH	UC(0x427)
-#define CU_SH	UC(0x428)
-#define CU_SHCH	UC(0x429)
-#define CU_HS	UC(0x42a)
-#define CU_bl	UC(0x42b)
-#define CU_LS	UC(0x42c)
-#define CU_E	UC(0x42d)
-#define CU_YU	UC(0x42e)
-#define CU_YA	UC(0x430)
-// }}} unicode
-
 /* Home-row mods */
 
 // Home-row mods (Boo).
@@ -126,31 +41,6 @@
 #define ALT_L LALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
 
-/**
- * Home-row mods (ycuken).
- *   We can't just use unicode keys in tap-hold due to the QMK limitation.
- *   @see https://docs.qmk.fm/mod_tap#caveats
- *   So, we define a custom keycode instead (@see https://docs.qmk.fm/mod_tap#intercepting-mod-taps)
- *   To keep it sanely simple, we implement only the NUM_NAV mod.
- */
-enum custom_keycodes {
-  KC_CV = SAFE_RANGE,
-  KC_CL,
-};
-
-#define LT3__V LT(L_NUM_NAV, KC_CV)
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case KC_CV:
-      send_unicode_string("в");
-      if (record->event.pressed) {
-        send_unicode_string("в");
-      }
-      return false;
-  }
-   return true;
-}
 
 /* Key aliases */
 
@@ -162,8 +52,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 enum my_layer_names {
   L_BOO,
   L_QWERTY,
-  L_CYRILLIC_LOWER,
-  L_CYRILLIC_UPPER,
   L_SYMBOLS,
   L_NUM_NAV,
   L_FKEYS_SYSTEM,
@@ -172,8 +60,6 @@ enum my_layer_names {
 };
 
 #define TG_QWER TG(L_QWERTY)
-#define TG_CYLO TG(L_CYRILLIC_LOWER)
-#define MO_CYUP MO(L_CYRILLIC_UPPER)
 #define OSL_SYM OSL(L_SYMBOLS)
 #define MO_SYS  MO(L_FKEYS_SYSTEM)
 #define MO_RGB  MO(L_RGB)
@@ -211,32 +97,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            __ ,    KC_Z,     __ ,    KC_C,   KC_V,  KC_B,     KC_N,  KC_M,  KC_COMM, KC_DOT, KC_SLSH,   __ ,
 
                          __     ,         __  ,    __  ,       __  ,    __  ,    __                      ),
-
-  [L_CYRILLIC_LOWER] = LAYOUT_split_3x6_3(/*
-        __ __  __  __  __  __                       __  __  __  __  __  __
-        __ __  __  __  __  __                       __  __  __  __  __  __
-        __ __  __  __  __  __                       __  __  __  __  __  __
-               __  __      __  ___ ___     ___ ___  ___     __  __
-                               ___ ___     ___ ___
-       */
-     CL_YO,   CL_Y ,     CL_TS,     CL_U,   CL_K ,  CL_YE,    CL_N ,   CL_G ,    CL_SH,    CL_SHCH, CL_Z ,   CL_KH,
-   TG_CYLO,   CL_F ,     CL_bl,   LT3__V,   CL_A ,  CL_P ,    CL_R ,   CL_O ,    CL_L ,    CL_D ,   CL_ZH,   CL_E ,
-   UC_LINX,   CL_YA,     CL_CH,     CL_S,   CL_M ,  CL_I ,    CL_T ,   CL_LS,    CL_B ,    CL_YU,   KC_DOT,  CL_HS,
-
-                         __     ,     MO_CYUP ,    __  ,       __  ,    __  ,    __                      ),
-
-  [L_CYRILLIC_UPPER] = LAYOUT_split_3x6_3(/*
-        __ __  __  __  __  __                       __  __  __  __  __  __
-        __ __  __  __  __  __                       __  __  __  __  __  __
-        __ __  __  __  __  __                       __  __  __  __  __  __
-               __  __      __  ___ ___     ___ ___  ___     __  __
-                               ___ ___     ___ ___
-       */
-     CU_YO,   CU_Y ,     CU_TS,    CU_U ,   CU_K ,  CU_YE,    CU_N ,   CU_G ,    CU_SH,    CU_SHCH, CU_Z ,   CU_KH,
-        __,   CU_F ,     CU_bl,    CU_V ,   CU_A ,  CU_P ,    CU_R ,   CU_O ,    CU_L ,    CU_D ,   CU_ZH,   CU_E ,
-        __,   CU_YA,     CU_CH,    CU_S ,   CU_M ,  CU_I ,    CU_T ,   CU_LS,    CU_B ,    CU_YU,      __,   CU_HS,
-
-                         __     ,          __ ,    __  ,       __  ,    __  ,    __                      ),
 
   [L_SYMBOLS] = LAYOUT_split_3x6_3(/*
         __  __  __  .   {   __                       __  }   __  __  __  __
