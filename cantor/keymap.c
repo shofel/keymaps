@@ -111,10 +111,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                          __     ,     KC_LSFT ,    __  ,       __  ,    __  ,    __                      ),
 
-  [L_NUM_NAV] = LAYOUT_split_3x6_3(/*  TODO update the left preview
-        __  __  7   8   9   scr                      __  }   __  __  __  __
-        __  0   4   5   6   del                      bs  ]   )   \   :   __
-        __  0   1   2   3   __                       __  =   >   __  __  __
+  [L_NUM_NAV] = LAYOUT_split_3x6_3(/*
+        __  __  7   8   9   scr                      hom pg↑ ↑   pg↓ end __
+        __  0   4   5   6   del                      bs  ←  ret  →   __  __
+        __  0   1   2   3   __                       __  tab ↓   __  __  __
                 __  __      sft ___ ___     ___ ___  ___     __  __
                                 ___ ___     ___ ___
        */
