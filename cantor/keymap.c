@@ -77,6 +77,28 @@ combo_t key_combos[] = {
   COMBO(mouse_combo, OSL_MOUSE),
 };
 
+/* */
+
+enum my_keycodes {
+  SWITCH_LANG = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case SWITCH_LANG:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code16(KC_SPACE);
+        unregister_code(KC_LGUI);
+      } else {
+        layer_invert(L_QWERTY);
+      }
+      return false; // Skip all further processing of this key
+    default:
+      return true; // Process all other keycodes normally
+  }
+}
+
 /* The keymap */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -86,15 +108,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        rst :   x   .   w   z                        p   h   m   k   j   rst
                        SYS sft SYM              ret spc ---
        */
-       TG_QWER, KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
-       TG_CYLO,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
+           __ , KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
+   SWITCH_LANG,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
        QK_BOOT, KC_SCLN,    KC_X,  KC_DOT,   KC_W,  KC_Z,     KC_P,  KC_H,  KC_M,  KC_K,  KC_J,   QK_BOOT,
                              MO_SYS , OSM_SFT , OSL_SYM ,     KC_ENTER , KC_SPC,  __                     ),
 
   [L_QWERTY] = LAYOUT_split_3x6_3(
-       TG_QWER,    KC_Q,    KC_W,    KC_E,   KC_R,  KC_T,     KC_Y,  KC_U,  KC_I,    KC_O,   KC_P,     KC_LBRC,
-       KC_GRV ,     __ ,   ALT_S,   LT3_D,  CTL_F,   __ ,     KC_H,  CTL_J, LT3_K,   ALT_L,  GUI_SCLN, KC_QUOTE,
-           __ ,    KC_Z,     __ ,    KC_C,   KC_V,  KC_B,     KC_N,  KC_M,  KC_COMM, KC_DOT, KC_SLSH,   __ ,
+        KC_GRV,    KC_Q,    KC_W,    KC_E,   KC_R,  KC_T,     KC_Y,  KC_U,  KC_I,    KC_O,   KC_P,     KC_LBRC,
+   SWITCH_LANG,     __ ,   ALT_S,   LT3_D,  CTL_F,   __ ,     KC_H,  CTL_J, LT3_K,   ALT_L,  GUI_SCLN, KC_QUOTE,
+            XX,    KC_Z,     __ ,    KC_C,   KC_V,  KC_B,     KC_N,  KC_M,  KC_COMM, KC_DOT, KC_SLSH,  KC_RBRC,
 
                          __     ,         __  ,    __  ,       __  ,    __  ,    __                      ),
 
