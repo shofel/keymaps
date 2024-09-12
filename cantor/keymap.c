@@ -108,10 +108,10 @@ tap_dance_action_t tap_dance_actions[] = {
 /* Hit both middle thumb keys for esc. */
 const uint16_t PROGMEM esc_combo[]   = {OSM_SFT, KC_SPACE, COMBO_END};
 /* Two outer bottom keys on a single half to get into bootloader. */
-const uint16_t PROGMEM boot_combo_left[]  = {XX_FAKE, OSL_SYM, COMBO_END};
+const uint16_t PROGMEM boot_combo_left[]  = {XX_FAKE,  DK_SYMO, COMBO_END};
 const uint16_t PROGMEM boot_combo_right[] = {KC_ENTER, XX_FAKE, COMBO_END};
 /* On a single half: the outermost bottom pinky key + the middle thumb key to reboot the keyboard. */
-const uint16_t PROGMEM reset_combo_left[]  = {XX_FAKE, OSM_SFT, COMBO_END};
+const uint16_t PROGMEM reset_combo_left[]  = {XX_FAKE,  OSM_SFT, COMBO_END};
 const uint16_t PROGMEM reset_combo_right[] = {KC_SPACE, XX_FAKE, COMBO_END};
 
 combo_t key_combos[] = {
@@ -128,10 +128,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case SWITCH_LANG:
       if (record->event.pressed) {
+        // win+space
         register_code(KC_LGUI);
         tap_code16(KC_SPACE);
         unregister_code(KC_LGUI);
-      } else {
+        //
         layer_invert(L_QWERTY);
       }
       return false; // Skip all further processing of this key
@@ -150,13 +151,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        SYS sft SYMO             ret spc ---
        */
            __ , KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
-   SWITCH_LANG,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
+           __ ,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
        XX_FAKE, KC_SCLN,    KC_X,  KC_DOT,   KC_W,  KC_Z,     KC_P,  KC_H,  KC_M,  KC_K,  KC_J,   XX_FAKE,
-                             MO_SYS , OSM_SFT , DK_SYMO ,     KC_ENTER , KC_SPC,  __                     ),
+                             MO_SYS , OSM_SFT , DK_SYMO ,     KC_ENTER , KC_SPC,  SWITCH_LANG            ),
 
   [L_QWERTY] = LAYOUT_split_3x6_3(
         KC_GRV,    KC_Q,    KC_W,    KC_E,   KC_R,  KC_T,     KC_Y,  KC_U,  KC_I,    KC_O,   KC_P,     KC_LBRC,
-   SWITCH_LANG,     __ ,   ALT_S,   LT3_D,  CTL_F,   __ ,     KC_H,  CTL_J, LT3_K,   ALT_L,  GUI_SCLN, KC_QUOTE,
+           __ ,     __ ,   ALT_S,   LT3_D,  CTL_F,   __ ,     KC_H,  CTL_J, LT3_K,   ALT_L,  GUI_SCLN, KC_QUOTE,
             XX,    KC_Z,     __ ,    KC_C,   KC_V,  KC_B,     KC_N,  KC_M,  KC_COMM, KC_DOT, KC_SLSH,  KC_RBRC,
 
                          __     ,         __  ,    __  ,       __  ,    __  ,    __                      ),
