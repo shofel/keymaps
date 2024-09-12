@@ -69,14 +69,43 @@ enum my_layer_names {
 #define OSL_SYM OSL(L_SYMBOLS)
 #define MO_SYS  MO(L_FKEYS_SYSTEM)
 #define MO_RGB  MO(L_RGB)
-#define OSL_MOUSE OSL(L_MOUSE)
+
+/* Tap dance */
+
+enum {
+  TD_SYM_MOUSE, /* Hold for SYM, tap-hold for MOUSE */
+};
+
+void td_sym_mouse_on_tap(tap_dance_state_t *state, void *user_data) {
+};
+
+void td_sym_mouse_on_finish(tap_dance_state_t *state, void *user_data) {
+  if (!state->pressed) return;
+  switch (state->count) {
+    case 1: layer_on(L_SYMBOLS); break;
+    case 2: layer_on(L_MOUSE); break;
+  };
+};
+
+void td_sym_mouse_on_reset(tap_dance_state_t *state, void *user_data) {
+  layer_off(L_SYMBOLS);
+  layer_off(L_MOUSE);
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+  [TD_SYM_MOUSE] = ACTION_TAP_DANCE_FN_ADVANCED(td_sym_mouse_on_tap,
+                                                td_sym_mouse_on_finish,
+                                                td_sym_mouse_on_reset),
+};
+
+/* DK is for "dance key" */
+#define DK_SYMO TD(TD_SYM_MOUSE)
 
 /* Combos */
 
 #define COMBO_ONLY_FROM_LAYER 0
 
 const uint16_t PROGMEM esc_combo[]   = {OSM_SFT, KC_SPACE, COMBO_END};
-const uint16_t PROGMEM mouse_combo[] = {OSL_SYM, KC_SPACE, COMBO_END};
 const uint16_t PROGMEM boot_combo_left[]  = {XX_FAKE, OSL_SYM, COMBO_END};
 const uint16_t PROGMEM boot_combo_right[] = {KC_ENTER, XX_FAKE, COMBO_END};
 const uint16_t PROGMEM reset_combo_left[]  = {XX_FAKE, OSM_SFT, COMBO_END};
@@ -84,7 +113,6 @@ const uint16_t PROGMEM reset_combo_right[] = {KC_SPACE, XX_FAKE, COMBO_END};
 
 combo_t key_combos[] = {
   COMBO(esc_combo, KC_ESC),
-  COMBO(mouse_combo, OSL_MOUSE),
   COMBO(boot_combo_left,  QK_BOOT),
   COMBO(boot_combo_right, QK_BOOT),
   COMBO(reset_combo_left,  QK_REBOOT),
@@ -121,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            __ , KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
    SWITCH_LANG,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
        XX_FAKE, KC_SCLN,    KC_X,  KC_DOT,   KC_W,  KC_Z,     KC_P,  KC_H,  KC_M,  KC_K,  KC_J,   XX_FAKE,
-                             MO_SYS , OSM_SFT , OSL_SYM ,     KC_ENTER , KC_SPC,  __                     ),
+                             MO_SYS , OSM_SFT , DK_SYMO ,     KC_ENTER , KC_SPC,  __                     ),
 
   [L_QWERTY] = LAYOUT_split_3x6_3(
         KC_GRV,    KC_Q,    KC_W,    KC_E,   KC_R,  KC_T,     KC_Y,  KC_U,  KC_I,    KC_O,   KC_P,     KC_LBRC,
