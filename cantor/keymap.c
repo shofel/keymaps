@@ -105,9 +105,12 @@ tap_dance_action_t tap_dance_actions[] = {
 
 #define COMBO_ONLY_FROM_LAYER 0
 
+/* Hit both middle thumb keys for esc. */
 const uint16_t PROGMEM esc_combo[]   = {OSM_SFT, KC_SPACE, COMBO_END};
+/* Two outer bottom keys on a single half to get into bootloader. */
 const uint16_t PROGMEM boot_combo_left[]  = {XX_FAKE, OSL_SYM, COMBO_END};
 const uint16_t PROGMEM boot_combo_right[] = {KC_ENTER, XX_FAKE, COMBO_END};
+/* On a single half: the outermost bottom pinky key + the middle thumb key to reboot the keyboard. */
 const uint16_t PROGMEM reset_combo_left[]  = {XX_FAKE, OSM_SFT, COMBO_END};
 const uint16_t PROGMEM reset_combo_right[] = {KC_SPACE, XX_FAKE, COMBO_END};
 
@@ -144,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        QWE '   ,   u   c   v                        q   f   d   l   y   /
        --- a   o   e   s   g                        b   n   t   r   i   -
        --- :   x   .   w   z                        p   h   m   k   j   ---
-                       SYS sft SYM              ret spc ---
+                       SYS sft SYMO             ret spc ---
        */
            __ , KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
    SWITCH_LANG,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
