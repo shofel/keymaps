@@ -167,14 +167,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          __     ,         __  ,    __  ,       __  ,    __  ,    __                      ),
 
   [L_SYMBOLS] = LAYOUT_split_3x6_3(/*
-        __  ~   __  __  {   __                       __  }   +   __  ;   __
-        __  `   /   (   [   del                      bs  ]   )   \   :   __
-        __  __  __  <   __  __                       __  =   >   |   __  __
+        __  ~   __  __  {   __                       __  }   +   |   ;   __
+        __  `   /   (   [   <                        >   ]   )   \   :   __
+        __  __  __  __  __  __                       __  =   >   __  __  __
                             ___ sft ___     ___ ___  ___
        */
         XX, KC_TILD,        XX,       XX, KC_LCBR,      XX,       XX,      KC_RCBR,  KC_PLUS,  KC_PIPE, KC_SCLN, XX,
-        XX,  KC_GRV,  KC_SLASH,  KC_LPRN, KC_LBRC,  KC_DEL,       KC_BSPC, KC_RBRC,  KC_RPRN,  KC_BSLS, KC_COLN, KC_MINUS,
-        XX,      XX,        XX,  KC_LABK,      XX,      XX,       XX,       KC_EQL,  KC_RABK,  XX,      XX,      XX,
+        XX,  KC_GRV,  KC_SLASH,  KC_LPRN, KC_LBRC, KC_LABK,       KC_RABK, KC_RBRC,  KC_RPRN,  KC_BSLS, KC_COLN, KC_MINUS,
+        XX,      XX,        XX,       XX,      XX,      XX,       XX,       KC_EQL,  KC_RABK,  XX,      XX,      XX,
 
                          __     ,     KC_LSFT ,    __  ,       __  ,    __  ,    __                      ),
 
@@ -205,9 +205,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          __     ,     KC_LSFT ,    __  ,       __  ,    __  ,    __                      ),
 
   [L_MOUSE] = LAYOUT_split_3x6_3(/*
-        __ __  __  __  __  __                       __  w↑  ↑  b2  __  __
-        __ __  alt b1  ctl __                       __  <-  b1 ->  b3  __
-        __ __  __  __  __  __                       __  w↓  ↓  __  __  __
+        __ __  __  __  __  __                       __  w↑  ↑  w↓  b3  __
+        __ __  alt b1  ctl __                       __  <-  b1 ->  b2  __
+        __ __  __  __  __  __                       __  __  ↓  __  __  __
                __  __      sft ___ ___     ___ ___  ___       __  __
                                ___ ___     ___ ___
        */
