@@ -106,7 +106,9 @@ tap_dance_action_t tap_dance_actions[] = {
 #define COMBO_ONLY_FROM_LAYER 0
 
 /* Hit both middle thumb keys for esc. */
-const uint16_t PROGMEM esc_combo[]   = {OSM_SFT, KC_SPACE, COMBO_END};
+const uint16_t PROGMEM esc_combo[]  = {OSM_SFT, KC_SPACE, COMBO_END};
+/* Duplicate the backspace from the numnav layer. */
+const uint16_t PROGMEM bspc_combo[] = {LT3_E, KC_B, COMBO_END};
 /* Two outer bottom keys on a single half to get into bootloader. */
 const uint16_t PROGMEM boot_combo_left[]  = {XX_FAKE,  DK_SYMO, COMBO_END};
 const uint16_t PROGMEM boot_combo_right[] = {KC_ENTER, XX_FAKE, COMBO_END};
@@ -116,6 +118,7 @@ const uint16_t PROGMEM reset_combo_right[] = {KC_SPACE, XX_FAKE, COMBO_END};
 
 combo_t key_combos[] = {
   COMBO(esc_combo, KC_ESC),
+  COMBO(bspc_combo, KC_BSPC),
   COMBO(boot_combo_left,  QK_BOOT),
   COMBO(boot_combo_right, QK_BOOT),
   COMBO(reset_combo_left,  QK_REBOOT),
