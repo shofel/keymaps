@@ -155,7 +155,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        */
            __ , KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
            __ ,   GUI_A,   ALT_O,   LT3_E,  CTL_S,  KC_G,     KC_B,  CTL_N, LT3_T, ALT_R, GUI_I,  KC_MINUS,
-       XX_FAKE, KC_SCLN,    KC_X,  KC_DOT,   KC_W,  KC_Z,     KC_P,  KC_H,  KC_M,  KC_K,  KC_J,   XX_FAKE,
+       XX_FAKE,     __ ,    KC_X,  KC_DOT,   KC_W,  KC_Z,     KC_P,  KC_H,  KC_M,  KC_K,  KC_J,   XX_FAKE,
+
                              MO_SYS , OSM_SFT , DK_SYMO ,     KC_ENTER , KC_SPC,  SWITCH_LANG            ),
 
   [L_QWERTY] = LAYOUT_split_3x6_3(
@@ -166,15 +167,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          __     ,         __  ,    __  ,       __  ,    __  ,    __                      ),
 
   [L_SYMBOLS] = LAYOUT_split_3x6_3(/*
-        __  __  __  .   {   __                       __  }   __  __  __  __
+        __  ~   __  __  {   __                       __  }   +   __  ;   __
         __  `   /   (   [   del                      bs  ]   )   \   :   __
-        __  __  __  <   +   __                       __  =   >   |   __  __
-                __  __      sft ___ ___     ___ ___  ___     __  __
-                                ___ ___     ___ ___
+        __  __  __  <   __  __                       __  =   >   |   __  __
+                            ___ sft ___     ___ ___  ___
        */
-        XX,      XX,        XX,   KC_DOT, KC_LCBR,      XX,       XX,      KC_RCBR,  XX,       KC_PIPE, XX,      XX,
+        XX, KC_TILD,        XX,       XX, KC_LCBR,      XX,       XX,      KC_RCBR,  KC_PLUS,  KC_PIPE, KC_SCLN, XX,
         XX,  KC_GRV,  KC_SLASH,  KC_LPRN, KC_LBRC,  KC_DEL,       KC_BSPC, KC_RBRC,  KC_RPRN,  KC_BSLS, KC_COLN, KC_MINUS,
-        XX,      XX,        XX,  KC_LABK, KC_PLUS,      XX,       XX,       KC_EQL,  KC_RABK,  XX,      XX,      XX,
+        XX,      XX,        XX,  KC_LABK,      XX,      XX,       XX,       KC_EQL,  KC_RABK,  XX,      XX,      XX,
 
                          __     ,     KC_LSFT ,    __  ,       __  ,    __  ,    __                      ),
 
