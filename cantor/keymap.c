@@ -147,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_BOO] = LAYOUT_split_3x6_3(/* BOO LAYOUT
        QWE '   ,   u   c   v                        q   f   d   l   y   /
        --- a   o   e   s   g                        b   n   t   r   i   -
-       --- :   x   .   w   z                        p   h   m   k   j   ---
+       --- ;   x   .   w   z                        p   h   m   k   j   ---
                        SYS sft SYMO             ret spc ---
        */
            __ , KC_QUOT, KC_COMM,    KC_U,   KC_C,  KC_V,     KC_Q,  KC_F,  KC_D,  KC_L,  KC_Y,   KC_SLASH,
@@ -208,9 +208,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                __  __      sft ___ ___     ___ ___  ___       __  __
                                ___ ___     ___ ___
        */
-        XX,      XX,        XX,       XX,      XX,     XX,       XX, KC_WH_U,  KC_MS_U,  KC_WH_D,      XX,      XX,
-        XX,      XX,   KC_LALT,  KC_BTN1, KC_LCTL,     XX,       XX, KC_MS_L,  KC_BTN1,  KC_MS_R, KC_BTN3,      XX,
-        XX,      XX,        XX,       XX,      XX,     XX,       XX, KC_BTN2,  KC_MS_D,       XX,      XX,      XX,
+        XX,      XX,        XX,       XX,      XX,     XX,       XX, KC_WH_U,  KC_MS_U,  KC_WH_D, KC_BTN3,      XX,
+        XX,      XX,   KC_LALT,  KC_BTN1, KC_LCTL,     XX,       XX, KC_MS_L,  KC_BTN1,  KC_MS_R, KC_BTN2,      XX,
+        XX,      XX,        XX,       XX,      XX,     XX,       XX,      XX,  KC_MS_D,       XX,      XX,      XX,
 
                          __     ,     KC_LSFT ,    __  ,       __  ,    __  ,    __                      ),
 
