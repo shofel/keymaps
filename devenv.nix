@@ -3,4 +3,7 @@
 {
   # https://devenv.sh/packages/
   packages = [ pkgs.gnumake ];
+
+  enterShell = ''
+  '';
 }
