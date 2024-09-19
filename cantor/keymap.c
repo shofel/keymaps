@@ -80,10 +80,15 @@ void td_sym_mouse_on_tap(tap_dance_state_t *state, void *user_data) {
 };
 
 void td_sym_mouse_on_finish(tap_dance_state_t *state, void *user_data) {
-  if (!state->pressed) return;
-  switch (state->count) {
-    case 1: layer_on(L_SYMBOLS); break;
-    case 2: layer_on(L_MOUSE); break;
+  if (!state->pressed) {
+    switch (state->count) {
+      case 1: caps_word_on(); break;
+    };
+  } else {
+    switch (state->count) {
+      case 1: layer_on(L_SYMBOLS); break;
+      case 2: layer_on(L_MOUSE); break;
+    };
   };
 };
 
