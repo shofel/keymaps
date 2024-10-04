@@ -106,6 +106,7 @@ tap_dance_action_t tap_dance_actions[] = {
 /* DK is for "dance key" */
 #define DK_SYMO TD(TD_SYM_MOUSE)
 
+
 /* Combos */
 
 #define COMBO_ONLY_FROM_LAYER 0
@@ -191,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 ___ ___     ___ ___
        */
         XX,      XX,      KC_7,     KC_8,    KC_9, KC_PSCR,       KC_HOME, KC_PGUP,  KC_UP,    KC_PGDN, KC_END,  XX,
-        XX,    KC_0,      KC_4,     KC_5,    KC_6,  KC_DEL,       KC_BSPC, KC_LEFT,  KC_ENTER, KC_RGHT, XX,      XX,
+        XX,    KC_0,      KC_4,     KC_5,    KC_6,  KC_DEL,       XX,      KC_LEFT,  KC_ENTER, KC_RGHT, XX,      XX,
         XX,    KC_0,      KC_1,     KC_2,    KC_3,      XX,       XX,      KC_TAB,   KC_DOWN,  XX,      XX,      XX,
 
                          __     ,     KC_LSFT ,    __  ,       __  ,    __  ,    __                      ),
