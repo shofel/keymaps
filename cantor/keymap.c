@@ -14,6 +14,7 @@
 //      Now they are good, but manual and prone to be outdated.
 
 #include QMK_KEYBOARD_H
+#include "print.h"
 
 /* Home-row mods */
 
@@ -21,7 +22,8 @@
 //
 #define GUI_A LGUI_T(KC_A)
 #define ALT_O LALT_T(KC_O)
-#define LT3_E LT(L_NUM_NAV, KC_E)
+// We define LT3_E later, as a tap-dance
+/* #define LT3E LT(L_NUM_NAV, KC_E) */
 #define CTL_S LCTL_T(KC_S)
 //
 #define CTL_N RCTL_T(KC_N)
@@ -74,7 +76,15 @@ enum my_layer_names {
 
 enum {
   TD_SYM_MOUSE, /* Hold for SYM, tap-hold for MOUSE */
+
+  /* It was a `LT(L_NUM_NAV, KC_E)`. But there was a problem:
+   * ee+b (tap-then-hold e, keydown b) lead to the text `bbbbbb`,
+   * while expected to be a backspace. */
+  TD_LT3_E,
 };
+
+
+/* TD_SYM_MOUSE */
 
 void td_sym_mouse_on_tap(tap_dance_state_t *state, void *user_data) {
 };
@@ -97,14 +107,40 @@ void td_sym_mouse_on_reset(tap_dance_state_t *state, void *user_data) {
   layer_off(L_MOUSE);
 };
 
+
+/* TD_LT3_E */
+
+void td_lt3_e_on_tap(tap_dance_state_t *state, void *user_data) {
+};
+
+void td_lt3_e_on_finish(tap_dance_state_t *state, void *user_data) {
+  if (state->pressed) {
+    layer_on(L_NUM_NAV);
+  } else {
+    send_string("e");
+  };
+};
+
+void td_lt3_e_on_reset(tap_dance_state_t *state, void *user_data) {
+  layer_off(L_NUM_NAV);
+};
+
+
+/* Tap dance together. */
+
 tap_dance_action_t tap_dance_actions[] = {
   [TD_SYM_MOUSE] = ACTION_TAP_DANCE_FN_ADVANCED(td_sym_mouse_on_tap,
                                                 td_sym_mouse_on_finish,
                                                 td_sym_mouse_on_reset),
+  [TD_LT3_E]     = ACTION_TAP_DANCE_FN_ADVANCED(td_lt3_e_on_tap,
+                                                td_lt3_e_on_finish,
+                                                td_lt3_e_on_reset),
+
 };
 
 /* DK is for "dance key" */
 #define DK_SYMO TD(TD_SYM_MOUSE)
+#define LT3_E   TD(TD_LT3_E)
 
 /* Combos */
 
